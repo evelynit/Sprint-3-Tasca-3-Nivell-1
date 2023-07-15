@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="535ae751-3ca8-48d1-83e8-baee4ca7f830" name="Changes" comment="Se han creado las clases Product y Tree">
-      <change afterPath="$PROJECT_DIR$/src/Flower.java" afterDir="false" />
+    <list default="true" id="535ae751-3ca8-48d1-83e8-baee4ca7f830" name="Changes" comment="Se ha creado la clase Decoration">
+      <change afterPath="$PROJECT_DIR$/src/FlowerShop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +50,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1689462218250</updated>
-      <workItem from="1689462221797" duration="364000" />
+      <workItem from="1689462221797" duration="1552000" />
     </task>
     <task id="LOCAL-00001" summary="Se han creado las clases Product y Tree">
       <created>1689462435176</created>
@@ -55,7 +59,21 @@
       <option name="project" value="LOCAL" />
       <updated>1689462435176</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Se ha creado la clase Flower">
+      <created>1689462615595</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1689462615595</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Se ha creado la clase Decoration">
+      <created>1689462811578</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1689462811578</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -63,7 +81,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Se han creado las clases Product y Tree" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se han creado las clases Product y Tree" />
+    <MESSAGE value="Se ha creado la clase Flower" />
+    <MESSAGE value="Se ha creado la clase Decoration" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se ha creado la clase Decoration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

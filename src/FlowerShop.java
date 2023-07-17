@@ -3,70 +3,99 @@ import java.util.List;
 
 public class FlowerShop {
     private String name;
-    private List<Tree> trees = new ArrayList<>();
-    private List<Flower> flowers = new ArrayList<>();
-    private List<Decoration> decorations = new ArrayList<>();
-    private double totalPrice = 0.0;
+    private ArrayList<Tree> trees;
+    private ArrayList<Flower> flowers;
+    private ArrayList<Decoration> decorations;
+    private double valueTotalStock;
+
+    // Constructor
 
     public FlowerShop(String name){
         this.name = name;
+        this.trees = new ArrayList<>();
+        this.flowers = new ArrayList<>();
+        this.decorations = new ArrayList<>();
+        this.valueTotalStock = 0.0;
     }
 
-    public void addTree(Tree tree){
-        trees.add(tree);
-        totalPrice += tree.getPrice();
+    public String getName() {
+        return name;
     }
 
-    public void addFlower(Flower flower){
-        flowers.add(flower);
-        totalPrice += flower.getPrice();
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void addDecoration(Decoration decoration){
-        decorations.add(decoration);
-        totalPrice += decoration.getPrice();
+    public double getValueTotalStock() {
+        return valueTotalStock;
+    }
+
+    public void setValueTotalStock(double valueTotalStock) {
+        this.valueTotalStock = valueTotalStock;
+    }
+
+    // Métodos para añadir y retirar productos
+    public void addTree(Tree tree) {
+        this.trees.add(tree);
+        updateValueTotalStock();
+    }
+
+    public void addFlower(Flower flower) {
+        this.flowers.add(flower);
+        updateValueTotalStock();
+    }
+
+    public void addDecoration(Decoration decoration) {
+        this.decorations.add(decoration);
+        updateValueTotalStock();
     }
 
     public void removeTree(Tree tree) {
-        if(trees.remove(tree)) {
-            totalPrice -= tree.getPrice();
-        }
+        this.trees.remove(tree);
+        updateValueTotalStock();
     }
 
     public void removeFlower(Flower flower) {
-        if(flowers.remove(flower)) {
-            totalPrice -= flower.getPrice();
-        }
+        this.flowers.remove(flower);
+        updateValueTotalStock();
     }
 
     public void removeDecoration(Decoration decoration) {
-        if(decorations.remove(decoration)) {
-            totalPrice -= decoration.getPrice();
-        }
-    }
-    public double calculateTotalPrice() {
-        return totalPrice;
+        this.decorations.remove(decoration);
+        updateValueTotalStock();
     }
 
-    public void printTrees() {
-        System.out.println("Arboles en stock:");
-        for(Tree i : trees) {
-            System.out.println("Altura: " + i.getHeight() + ", Precio: " + i.getPrice());
+    // Actualizar el valor total del stock
+    private void updateValueTotalStock() {
+        double value = 0.0;
+        for (Tree tree : this.trees) {
+            value += tree.getPrice();
         }
+        for (Flower flower : this.flowers) {
+            value += flower.getPrice();
+        }
+        for (Decoration decoration : this.decorations) {
+            value += decoration.getPrice();
+        }
+        this.valueTotalStock = value;
     }
 
-    public void printFlowers() {
-        System.out.println("Flores en stock:");
-        for(Flower i : flowers) {
-            System.out.println("Color: " + i.getColor() + ", Precio: " + i.getPrice());
+    // Imprimir el stock
+    public void printStock() {
+        System.out.println("Stock de la floristeria " + this.name + ":");
+        System.out.println("Arbres: " + this.trees.size());
+        for (Tree tree : this.trees) {
+            System.out.println(tree);
         }
-    }
-
-    public void printDecorations() {
-        System.out.println("Decoraciones en stock:");
-            for(Decoration i : decorations) {
-            System.out.println("Material: " + i.getMaterial() + ", Precio: " + i.getPrice());
+        System.out.println("Flors: " + this.flowers.size());
+        for (Flower flower : this.flowers) {
+            System.out.println(flower);
         }
+        System.out.println("Decoracions: " + this.decorations.size());
+        for (Decoration decoration : this.decorations) {
+            System.out.println(decoration);
+        }
+        System.out.println("Valor total del stock: " + this.valueTotalStock);
     }
 
 }

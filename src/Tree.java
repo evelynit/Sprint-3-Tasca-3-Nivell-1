@@ -1,8 +1,8 @@
 public class Tree extends Product{
     private double height;
 
-    public Tree(double price, double height) {
-        super(price);
+    public Tree(String name, double price, int stock, double height) {
+        super(name, price, stock);
         this.height = height;
     }
 
@@ -12,5 +12,10 @@ public class Tree extends Product{
 
     public void setHeight(double height) {
         this.height = height;
+    }
+
+    @Override
+    public String toString() {
+        return "Arbre [nom=" + getName() + ", preu=" + getPrice() + ", stock=" + getStock() + ", alcada=" + height + "]";
     }
 }

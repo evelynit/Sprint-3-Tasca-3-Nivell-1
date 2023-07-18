@@ -38,27 +38,26 @@ public class Main {
     }
 
     public static byte getOption(){
-
-        byte option;
         final byte MINIMUM = 0;
         final byte MAXIMUM = 13;
+        byte option;
 
         do{
             System.out.println("\nMAIN MENU");
-            System.out.println("1. Create Florist");
-            System.out.println("2. Add Tree");
-            System.out.println("3. Add Flower");
-            System.out.println("4. Add Decoration");
-            System.out.println("5. Remove Tree");
-            System.out.println("6. Remove Flower");
-            System.out.println("7. Remove Decoration");
+            System.out.println("1. Create florist");
+            System.out.println("2. Add tree");
+            System.out.println("3. Add flower");
+            System.out.println("4. Add decoration");
+            System.out.println("5. Remove tree");
+            System.out.println("6. Remove flower");
+            System.out.println("7. Remove decoration");
             System.out.println("8. View all products");
-            System.out.println("9. View Stock with quantities");
-            System.out.println("10. View total product value in the florist");
-            System.out.println("11. Create Purchase Ticket");
-            System.out.println("12. Show list of old tickets");
-            System.out.println("13. View total billing (€)");
-            System.out.println("0. Exit the application\n");
+            System.out.println("9. View stock (quantities)");
+            System.out.println("10. View total product value");
+            System.out.println("11. Create purchase ticket");
+            System.out.println("12. Show history tickets");
+            System.out.println("13. Total billing");
+            System.out.println("0. Exit\n");
             option = input.nextByte();
             input.nextLine();
             if(option < MINIMUM || option > MAXIMUM){

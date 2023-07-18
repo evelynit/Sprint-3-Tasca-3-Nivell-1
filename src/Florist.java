@@ -32,6 +32,48 @@ public class Florist {
         this.totalStock = totalStock;
     }
 
+    // Getters and Setters for lists
+    public static ArrayList<Flower> getFlowers() {
+        return flowers;
+    }
+
+    public static ArrayList<Tree> getTrees() {
+        return trees;
+    }
+
+    public static ArrayList<Decoration> getDecorations() {
+        return decorations;
+    }
+
+    public Ticket getTicket() {
+
+        return null;
+    }
+
+    public Florist findProductByName(String productName) {
+
+        for (Florist tree : Ticket.getProducts()) {
+            if (tree.getName().equalsIgnoreCase(productName)) {
+                return tree;
+            }
+        }
+
+        for (Florist flower : Ticket.getProducts()) {
+            if (flower.getName().equalsIgnoreCase(productName)) {
+                return flower;
+            }
+        }
+
+        for (Florist decoration : Ticket.getProducts()) {
+            if (decoration.getName().equalsIgnoreCase(productName)) {
+                return decoration;
+            }
+        }
+
+        return null;
+    }
+
+    // NEW METHODS
     public static void addProduct(Florist product) {
         Ticket.getProducts().add(product);
         System.out.println("Product added to the catalog");
@@ -48,8 +90,6 @@ public class Florist {
         }
     }
 
-
-    // METHODS
     public void reduceStock(Florist foundProduct, int quantity) {
         if (foundProduct instanceof Tree tree) {
             tree.setStock(tree.getStock() - quantity);
@@ -89,49 +129,6 @@ public class Florist {
             }
         }
     }
-
-    public Florist findProductByName(String productName) {
-
-        for (Florist tree : Ticket.getProducts()) {
-            if (tree.getName().equalsIgnoreCase(productName)) {
-                return tree;
-            }
-        }
-
-        for (Florist flower : Ticket.getProducts()) {
-            if (flower.getName().equalsIgnoreCase(productName)) {
-                return flower;
-            }
-        }
-
-        for (Florist decoration : Ticket.getProducts()) {
-            if (decoration.getName().equalsIgnoreCase(productName)) {
-                return decoration;
-            }
-        }
-
-        return null;
-    }
-
-
-    // Getters and Setters for lists
-    public static ArrayList<Flower> getFlowers() {
-        return flowers;
-    }
-
-    public static ArrayList<Tree> getTrees() {
-        return trees;
-    }
-
-    public static ArrayList<Decoration> getDecorations() {
-        return decorations;
-    }
-
-    public Ticket getTicket() {
-
-        return null;
-    }
-
     public void viewTicketDetail() {
         Ticket.viewTicketHistory(Ticket.getPurchases());
     }

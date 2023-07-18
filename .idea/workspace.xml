@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="535ae751-3ca8-48d1-83e8-baee4ca7f830" name="Changes" comment="Se han añadido las funciones updateValueStock y printStock">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Decoration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Decoration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Flower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Flower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FlowerShop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Florist.java" afterDir="false" />
+    <list default="true" id="535ae751-3ca8-48d1-83e8-baee4ca7f830" name="Changes" comment="Se han añadido las nuevas funciones en Main">
+      <change beforePath="$PROJECT_DIR$/src/Florist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Florist.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Product.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ticket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tree.java" afterDir="false" />
     </list>
@@ -60,7 +55,7 @@
       <updated>1689462218250</updated>
       <workItem from="1689462221797" duration="1552000" />
       <workItem from="1689609329454" duration="6382000" />
-      <workItem from="1689640891946" duration="4321000" />
+      <workItem from="1689640891946" duration="5049000" />
     </task>
     <task id="LOCAL-00001" summary="Se han creado las clases Product y Tree">
       <created>1689462435176</created>
@@ -90,7 +85,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689612491049</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Se han añadido las nuevas funciones en Main">
+      <created>1689645352129</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1689645352129</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,7 +103,8 @@
     <MESSAGE value="Se ha creado la clase Flower" />
     <MESSAGE value="Se ha creado la clase Decoration" />
     <MESSAGE value="Se han añadido las funciones updateValueStock y printStock" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se han añadido las funciones updateValueStock y printStock" />
+    <MESSAGE value="Se han añadido las nuevas funciones en Main" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se han añadido las nuevas funciones en Main" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

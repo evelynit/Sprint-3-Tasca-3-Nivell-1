@@ -7,6 +7,7 @@ public class Ticket {
     private static ArrayList<Florist> purchases;
     private static ArrayList<Florist> products;
 
+    //INITIALISE LIST
     static {
         products = new ArrayList<>();
     }
@@ -14,15 +15,38 @@ public class Ticket {
         purchases = new ArrayList<>();
     }
 
-    public static ArrayList<Florist> getProducts() {
-        return products;
-    }
-
+    //Contructor
     public Ticket() {
         this.ticketNumber = ++ticketCounter;
         purchases = new ArrayList<>();
     }
 
+    //Getters and setters
+    public static ArrayList<Florist> getProducts() {
+        return products;
+    }
+
+    public static void setProducts(ArrayList<Florist> products) {
+        Ticket.products = products;
+    }
+
+    public void setPurchases(ArrayList<Florist> purchases) {
+        Ticket.purchases = purchases;
+    }
+
+    public static ArrayList<Florist> getPurchases() {
+        return purchases;
+    }
+
+    public int getTicketNumber() {
+        return ticketNumber;
+    }
+
+    public void setTicketNumber(int ticketNumber) {
+        this.ticketNumber = ticketNumber;
+    }
+
+    // Methods
     public void addPurchases(Florist foundProduct) {
         purchases.add(foundProduct);
     }
@@ -60,25 +84,4 @@ public class Ticket {
 
         return totalPrice;
     }
-
-    public void setPurchases(ArrayList<Florist> purchases) {
-        Ticket.purchases = purchases;
-    }
-
-    public static ArrayList<Florist> getPurchases() {
-        return purchases;
-    }
-
-    public static void setProducts(ArrayList<Florist> products) {
-        Ticket.products = products;
-    }
-
-    public int getTicketNumber() {
-        return ticketNumber;
-    }
-
-    public void setTicketNumber(int ticketNumber) {
-        this.ticketNumber = ticketNumber;
-    }
-
 }

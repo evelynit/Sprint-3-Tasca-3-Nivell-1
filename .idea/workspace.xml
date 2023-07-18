@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="535ae751-3ca8-48d1-83e8-baee4ca7f830" name="Changes" comment="Se han añadido las nuevas funciones en Main">
-      <change beforePath="$PROJECT_DIR$/src/Florist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Florist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ticket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tree.java" afterDir="false" />
-    </list>
+    <list default="true" id="535ae751-3ca8-48d1-83e8-baee4ca7f830" name="Changes" comment="Se han añadido las nuevas funciones en Main" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,7 +50,7 @@
       <updated>1689462218250</updated>
       <workItem from="1689462221797" duration="1552000" />
       <workItem from="1689609329454" duration="6382000" />
-      <workItem from="1689640891946" duration="5049000" />
+      <workItem from="1689640891946" duration="5180000" />
     </task>
     <task id="LOCAL-00001" summary="Se han creado las clases Product y Tree">
       <created>1689462435176</created>
@@ -92,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689645352129</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Se han añadido las nuevas funciones en Main">
+      <created>1689646024629</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1689646024629</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

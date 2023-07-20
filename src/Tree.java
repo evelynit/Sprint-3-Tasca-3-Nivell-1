@@ -48,6 +48,6 @@ public class Tree extends Florist{
 
     @Override
     public String toString() {
-        return "Name:" + name + "/ Height: " + height + "m/ Price: " + price + "€/ Stock: "+stock;
+        return "Tree," + name + "," + price + "," + stock + "," + height;
     }
 }

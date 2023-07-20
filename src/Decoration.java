@@ -50,7 +50,7 @@ public class Decoration extends Florist{
 
     @Override
     public String toString() {
-        return "Item:" + name + "/ Material:" + material + "/ Price:" + price + " €/ Stock: " + stock;
+        return "Decoration," + name + "," + price + "," + stock + "," + material;
     }
 
 }

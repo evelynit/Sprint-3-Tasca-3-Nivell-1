@@ -51,10 +51,11 @@ public class Ticket {
         purchases.add(foundProduct);
     }
 
-    public static void viewTicketHistory(ArrayList<Florist> purchases) {
+    /**
+    public static void viewTicketHistory(ArrayList<Ticket> tickets) {
         System.out.println("Ticket History:");
-        for (int i = 0; i < purchases.size(); i++) {
-            Florist ticket = purchases.get(i);
+        for (int i = 0; i < tickets.size(); i++) {
+            Ticket ticket = tickets.get(i);
             System.out.println("Ticket #" + (i + 1));
             ticket.viewTicketDetail();
             System.out.println(); // Line break to separate tickets
@@ -84,4 +85,8 @@ public class Ticket {
 
         return totalPrice;
     }
+
+     **/
+
+
 }

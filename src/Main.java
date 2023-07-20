@@ -1,33 +1,43 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Florist florist = new Florist("Cielo");
-        Tree tree = new Tree("Olive", 40.0, 40, 3);
-        florist.addProduct(tree);
-        Flower flower = new Flower("Rose", 2.5, "Red", 20);
-        florist.addProduct(flower);
-        Decoration decoration = new Decoration("flowerpot", 10, 30, "Plastic");
-        florist.addProduct(decoration);
+        List<Florist> florists = new ArrayList<>();
+        florists = Florist.loadProductsFromFile("resources/florists.txt", florists);
+
+        /**
+         Florist florist = new Florist("Cielo");
+         Tree tree = new Tree("Olive", 40.0, 40, 3);
+         florist.addProduct(tree);
+         Flower flower = new Flower("Rose", 2.5, "Red", 20);
+         florist.addProduct(flower);
+         Decoration decoration = new Decoration("flowerpot", 10, 30, "Plastic");
+         florist.addProduct(decoration);
+         **/
 
         boolean exit = false;
         do {
             switch (getOption()) {
-                case 1 -> addFlorist();
-                case 2 -> addTree();
-                case 3 -> addFlower();
-                case 4 -> addDecoration();
-                case 5 -> removeTree(Ticket.getProducts());
-                case 6 -> removeFlower(Ticket.getProducts());
-                case 7 -> removeDecoration(Ticket.getProducts());
+                case 1 -> addFlorist(florists);
+                case 2 -> addTree(florists);
+                case 3 -> addFlower(florists);
+                case 4 -> addDecoration(florists);
+                case 5 -> removeTree(florists);
+                case 6 -> removeFlower(florists);
+                case 7 -> removeDecoration(florists);
                 case 8 -> printStock(Ticket.getProducts());
-                case 9 -> stockWithQuantities(florist);
-                case 10 -> stockWithPrices(florist);
-                case 11 -> createTicket(florist);
-                case 12 -> ticketHistory();
+                case 9 -> stockWithQuantities(florists);
+                case 10 -> stockWithPrices(florists);
+                //case 11 -> createTicket(florist);
+                //case 12 -> ticketHistory();
                 case 13 -> totalSales(Ticket.getPurchases());
                 case 0 -> {
                     System.out.println("Exit the application");
@@ -37,12 +47,12 @@ public class Main {
         } while (!exit);
     }
 
-    public static byte getOption(){
+    public static byte getOption() {
         final byte MINIMUM = 0;
         final byte MAXIMUM = 13;
         byte option;
 
-        do{
+        do {
             System.out.println("\nMAIN MENU");
             System.out.println("1. Create florist");
             System.out.println("2. Add tree");
@@ -60,21 +70,48 @@ public class Main {
             System.out.println("0. Exit\n");
             option = input.nextByte();
             input.nextLine();
-            if(option < MINIMUM || option > MAXIMUM){
+            if (option < MINIMUM || option > MAXIMUM) {
                 System.out.println("Choose a valid option");
             }
-        }while(option < MINIMUM || option > MAXIMUM);
+        } while (option < MINIMUM || option > MAXIMUM);
         return option;
     }
 
-    private static Florist addFlorist() {
+    private static void addFlorist(List<Florist> florists) {
         System.out.println("What is the Florist's name?");
         String name = input.nextLine();
-        return new Florist(name);
+        Florist florist = new Florist(name);
+        florists.add(florist);
+
+        // Write to file
+        try (FileWriter fw = new FileWriter("resources/florists.txt", true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+            out.println(name);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private static void addTree() {
-        Florist florist = addFlorist();
+    private static Florist selectFloristByName(List<Florist> florists) {
+        System.out.println("Select a florist by entering its name:");
+        for (Florist florist : florists) {
+            System.out.println(florist.getName());
+        }
+
+        String name = input.nextLine();
+        for (Florist florist : florists) {
+            if (florist.getName().equalsIgnoreCase(name)) {
+                return florist;
+            }
+        }
+
+        System.out.println("No florist found with the name " + name);
+        return null; // O puedes lanzar una excepción aquí dependiendo de cómo desees manejar este caso.
+    }
+
+    private static void addTree(List<Florist> florists) {
+        Florist florist = selectFloristByName(florists);
 
         System.out.print("Enter the tree's name: ");
         String treeName = input.nextLine();
@@ -87,10 +124,12 @@ public class Main {
 
         Tree tree = new Tree(treeName, treePrice, stock, treeHeight);
         florist.addProduct(tree);
+        // save to file
+        Florist.writeProductsToFile(florists, "resources/florists.txt");
     }
 
-    private static void addFlower() {
-        Florist florist = addFlorist();
+    private static void addFlower(List<Florist> florists) {
+        Florist florist = selectFloristByName(florists);
 
         System.out.print("Enter the flower's name: ");
         String flowerName = input.nextLine();
@@ -104,10 +143,12 @@ public class Main {
 
         Flower flower = new Flower(flowerName, flowerPrice, color, stock);
         florist.addProduct(flower);
+        Florist.writeProductsToFile(florists, "resources/florists.txt");
+
     }
 
-    private static void addDecoration() {
-        Florist florist = addFlorist();
+    private static void addDecoration(List<Florist> florists) {
+        Florist florist = selectFloristByName(florists);
 
         System.out.print("Enter the article's name: ");
         String name = input.nextLine();
@@ -121,113 +162,115 @@ public class Main {
 
         Decoration decoration = new Decoration(name, treePrice, stock, material);
         florist.addProduct(decoration);
-        System.out.println(Ticket.getProducts());
+        //System.out.println(Ticket.getProducts());
+        Florist.writeProductsToFile(florists, "resources/florists.txt");
+
     }
 
-    private static void removeDecoration(ArrayList<Florist> products) {
-        System.out.print("Enter the name of the article to remove: ");
-        String articleName = input.nextLine();
+    private static void removeDecoration(List<Florist> florists) {
+        Florist florist = selectFloristByName(florists);
+
+        System.out.print("Enter the name of the decoration to remove: ");
+        String decorationName = input.nextLine();
         System.out.print("Enter the number of units to remove: ");
         int unitsToRemove = input.nextInt();
         input.nextLine(); // Consume the newline character
 
-        for (Florist decoration : Ticket.getProducts()) {
-            if (decoration instanceof Decoration && decoration.getName().equalsIgnoreCase(articleName)) {
-                int currentStock = ((Decoration) decoration).getStock();
-
-                if (unitsToRemove <= currentStock) {
-                    ((Decoration) decoration).setStock(currentStock - unitsToRemove);
-                    System.out.println(unitsToRemove + " units of the article " + decoration.getName() + " were removed.");
-                } else {
-                    System.out.println("There are not enough units of that article in the stock.");
-                }
-                return;
+        Decoration decoration = florist.getDecorationByName(decorationName);
+        if (decoration != null) {
+            int currentStock = decoration.getStock();
+            if (unitsToRemove <= currentStock) {
+                decoration.setStock(currentStock - unitsToRemove);
+                System.out.println(unitsToRemove + " units of the decoration " + decoration.getName() + " were removed.");
+            } else {
+                System.out.println("There are not enough units of that decoration in the stock.");
             }
+        } else {
+            System.out.println("The decoration with that name was not found in the catalog.");
         }
-
-        System.out.println("The article with that name was not found in the catalog.");
     }
 
-    private static void removeFlower(ArrayList<Florist> products) {
+    private static void removeFlower(List<Florist> florists) {
+        Florist florist = selectFloristByName(florists);
+
         System.out.print("Enter the name of the flower to remove: ");
         String flowerName = input.nextLine();
         System.out.print("Enter the number of units to remove: ");
         int unitsToRemove = input.nextInt();
         input.nextLine(); // Consume the newline character
 
-        for (Florist flower : Ticket.getProducts()) {
-            if (flower instanceof Flower && flower.getName().equalsIgnoreCase(flowerName)) {
-                int currentStock = ((Flower) flower).getStock();
-
-                if (unitsToRemove <= currentStock) {
-                    ((Flower) flower).setStock(currentStock - unitsToRemove);
-                    System.out.println(unitsToRemove + " units of the flower " + flower.getName() + " were removed.");
-                } else {
-                    System.out.println("There are not enough units of that flower in the stock.");
-                }
-                return;
+        Flower flower = florist.getFlowerByName(flowerName);
+        if (flower != null) {
+            int currentStock = flower.getStock();
+            if (unitsToRemove <= currentStock) {
+                flower.setStock(currentStock - unitsToRemove);
+                System.out.println(unitsToRemove + " units of the flower " + flower.getName() + " were removed.");
+            } else {
+                System.out.println("There are not enough units of that flower in the stock.");
             }
+        } else {
+            System.out.println("The flower with that name was not found in the catalog.");
         }
-        System.out.println("The flower with that name was not found in the catalog.");
     }
 
-    private static void removeTree(ArrayList<Florist> products) {
+    private static void removeTree(List<Florist> florists) {
+        Florist florist = selectFloristByName(florists);
+
         System.out.print("Enter the name of the tree to remove: ");
         String treeName = input.nextLine();
         System.out.print("Enter the number of units to remove: ");
         int unitsToRemove = input.nextInt();
         input.nextLine(); // Consume the newline character
 
-        for (Florist tree : Ticket.getProducts()) {
-            if (tree instanceof Tree && tree.getName().equalsIgnoreCase(treeName)) {
-                int currentStock = ((Tree) tree).getStock();
-
-                if (unitsToRemove <= currentStock) {
-                    ((Tree) tree).setStock(currentStock - unitsToRemove);
-                    System.out.println(unitsToRemove + " units of the tree " + tree.getName() + " were removed.");
-                } else {
-                    System.out.println("There are not enough units of that tree in the stock.");
-                }
-                return;
+        Tree tree = florist.getTreeByName(treeName);
+        if (tree != null) {
+            int currentStock = tree.getStock();
+            if (unitsToRemove <= currentStock) {
+                tree.setStock(currentStock - unitsToRemove);
+                System.out.println(unitsToRemove + " units of the tree " + tree.getName() + " were removed.");
+            } else {
+                System.out.println("There are not enough units of that tree in the stock.");
             }
+        } else {
+            System.out.println("The tree with that name was not found in the catalog.");
         }
-        System.out.println("The tree with that name was not found in the catalog.");
     }
 
-    private static void printStock(ArrayList<Florist> products) {
+    private static void printStock(List<Florist> florists) {
+        Florist selectedFlorist = selectFloristByName(florists);
+
         System.out.println("Florist's Stock:");
 
         System.out.println("Trees:");
-        for (Florist product : products) {
-            if (product instanceof Tree) {
-                System.out.println(product);
-            }
+        for (Tree tree : selectedFlorist.getTrees()) {
+            System.out.println(tree);
         }
 
         System.out.println("Flowers:");
-        for (Florist product : products) {
-            if (product instanceof Flower) {
-                System.out.println(product);
-            }
+        for (Flower flower : selectedFlorist.getFlowers()) {
+            System.out.println(flower);
         }
 
         System.out.println("Decorations:");
-        for (Florist product : products) {
-            if (product instanceof Decoration) {
-                System.out.println(product);
-            }
+        for (Decoration decoration : selectedFlorist.getDecorations()) {
+            System.out.println(decoration);
         }
     }
-    private static void stockWithQuantities(Florist florist) {
-        florist.calculateStockQuantities(Ticket.getProducts());
+
+    private static void stockWithQuantities(List<Florist> florists) {
+        Florist selectedFlorist = selectFloristByName(florists);
+        selectedFlorist.calculateStockQuantities();
     }
 
-    private static void stockWithPrices(Florist florist) {
-        double totalProductValue = florist.calculateTotalStockValue(Ticket.getProducts());
+    private static void stockWithPrices(List<Florist> florists) {
+        Florist selectedFlorist = selectFloristByName(florists);
+        double totalProductValue = selectedFlorist.calculateTotalStockValue();
         System.out.println("Total value of the products: " + totalProductValue);
     }
 
-    private static void createTicket(Florist florist) {
+    /**
+    private static void createTicket(List<Florist> florists) {
+        Florist selectedFlorist = selectFloristByName(florists);
         boolean addProducts = true;
         Ticket ticket = new Ticket();
 
@@ -239,13 +282,13 @@ public class Main {
             input.nextLine(); // Consume the newline character
 
             // Search the product by its name in Florist
-            Florist foundProduct = florist.findProductByName(productName);
+            Florist foundProduct = selectedFlorist.findProductByName(productName);
 
             if (foundProduct != null && quantity > 0) {
                 // Add the product to the ticket
-                ticket.addPurchases(foundProduct);
+                ticket.addPurchases(foundProduct, quantity);
                 System.out.println("Product added to the ticket.");
-                foundProduct.reduceStock(foundProduct, quantity);
+                foundProduct.reduceStock(quantity);
 
                 System.out.println("Do you want to add another product? (Y/N)");
                 String option = input.nextLine();
@@ -258,21 +301,24 @@ public class Main {
         }
 
         ticket.calculateTotal();
+        selectedFlorist.addTicket(ticket);
     }
 
-    private static void ticketHistory() {
-        Ticket.viewTicketHistory(Ticket.getPurchases());
+
+    private static void ticketHistory(List<Florist> florists) {
+        Florist selectedFlorist = selectFloristByName(florists);
+        selectedFlorist.viewTicketHistory();
     }
 
-    public static void totalSales(ArrayList<Florist> purchases) {
+    **/
+    public static void totalSales(List<Florist> florists) {
         double totalSales = 0.0;
 
-        for (Florist purchase : purchases) {
-            Ticket ticket = purchase.getTicket();
-            double totalTicket = ticket.calculateTotal();
-            totalSales += totalTicket;
+        for (Florist florist : florists) {
+            totalSales += florist.getTotalSales();
         }
 
         System.out.println("Total sales are: " + totalSales + "€");
     }
+
 }

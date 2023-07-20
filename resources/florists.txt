@@ -1,0 +1,13 @@
+FloristOne,Tree,Oak,2.5,120.0,10
+FloristOne,Flower,Rose,Red,10.0,50
+FloristOne,Decoration,Vase,20.0,15,ceramic
+FloristTwo,Tree,Pine,3.0,200.0,5
+FloristTwo,Flower,Daisy,White,5.0,60
+FloristThree,Tree,Maple,3.5,180.0,8
+FloristThree,Decoration,Pot,25.0,20,clay
+FloristFour,Tree,Birch,2.0,110.0,12
+FloristFour,Flower,Tulip,Yellow,8.0,40
+FloristFour,Decoration,Candle,15.0,30,wax
+FloristFive,Tree,Willow,4.0,210.0,6
+FloristFive,Flower,Lily,White,12.0,30
+FloristFive,Decoration,Lantern,30.0,10,metal

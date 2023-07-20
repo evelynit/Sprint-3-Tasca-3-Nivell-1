@@ -1,10 +1,19 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class Florist {
     private String name;
     private static ArrayList<Tree> trees;
     private static ArrayList<Flower> flowers;
-    private static ArrayList<Decoration> decorations;
+    private  static ArrayList<Decoration> decorations;
     private double totalStock;
+    private  static ArrayList<Ticket> tickets;
+    private double totalSales;
 
     // Constructor
     public Florist(String name) {
@@ -12,7 +21,9 @@ public class Florist {
         trees = new ArrayList<>();
         flowers = new ArrayList<>();
         decorations = new ArrayList<>();
-        totalStock = totalStock;
+        tickets = new ArrayList<>();
+        totalStock = 0;
+        totalSales = 0;
     }
 
 
@@ -73,7 +84,114 @@ public class Florist {
         return null;
     }
 
+    public Tree getTreeByName(String name) {
+        for (Tree tree : this.trees) {
+            if (tree.getName().equalsIgnoreCase(name)) {
+                return tree;
+            }
+        }
+        return null;
+    }
+
+    public Flower getFlowerByName(String name) {
+        for (Flower flower : this.flowers) {
+            if (flower.getName().equalsIgnoreCase(name)) {
+                return flower;
+            }
+        }
+        return null;
+    }
+
+    public Decoration getDecorationByName(String name) {
+        for (Decoration decoration : this.decorations) {
+            if (decoration.getName().equalsIgnoreCase(name)) {
+                return decoration;
+            }
+        }
+        return null;
+    }
+
     // NEW METHODS
+    public static ArrayList<Florist> loadProductsFromFile(String fileName, List<Florist> florists) {
+        ArrayList<Florist> newFlorists = new ArrayList<>();
+
+        try {
+            File file = new File(fileName);
+            Scanner reader = new Scanner(file);
+
+            while (reader.hasNextLine()) {
+                String line = reader.nextLine();
+                String[] parts = line.split(",");
+
+                String floristName = parts[0];
+                String productType = parts[1];
+
+                Florist florist = findFloristByName(floristName, florists);
+                if (florist == null) {
+                    florist = new Florist(floristName);
+                    newFlorists.add(florist);
+                }
+
+                if (productType.equals("Tree")) {
+                    String name = parts[2];
+                    double height = Double.parseDouble(parts[3]);
+                    double price = Double.parseDouble(parts[4]);
+                    int stock = Integer.parseInt(parts[5]);
+                    florist.addProduct(new Tree(name, price, stock, height));
+                } else if (productType.equals("Flower")) {
+                    String name = parts[2];
+                    String color = parts[3];
+                    double price = Double.parseDouble(parts[4]);
+                    int stock = Integer.parseInt(parts[5]);
+                    florist.addProduct(new Flower(name, price, color, stock));
+                } else if (productType.equals("Decoration")) {
+                    String name = parts[2];
+                    double price = Double.parseDouble(parts[3]);
+                    int stock = Integer.parseInt(parts[4]);
+                    String material = parts[5];
+                    florist.addProduct(new Decoration(name, price, stock, material));
+                }
+            }
+
+            reader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        return newFlorists;
+    }
+
+    private static Florist findFloristByName(String name, List<Florist> florists) {
+        for (Florist florist : florists) {
+            if (florist.getName().equals(name)) {
+                return florist;
+            }
+        }
+        return null;
+    }
+
+    public static void writeProductsToFile(List<Florist> florists, String fileName) {
+        try {
+            FileWriter writer = new FileWriter(fileName);
+            for (Florist florist : florists) {
+                for (Tree tree : florist.getTrees()) {
+                    writer.write(florist.getName() + ",Tree," + tree.toString() + System.lineSeparator());
+                }
+                for (Flower flower : florist.getFlowers()) {
+                    writer.write(florist.getName() + ",Flower," + flower.toString() + System.lineSeparator());
+                }
+                for (Decoration decoration : florist.getDecorations()) {
+                    writer.write(florist.getName() + ",Decoration," + decoration.toString() + System.lineSeparator());
+                }
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
     public static void addProduct(Florist product) {
         Ticket.getProducts().add(product);
         System.out.println("Product added to the catalog");
@@ -100,39 +218,57 @@ public class Florist {
         }
     }
 
-    public double calculateTotalStockValue(ArrayList<Florist> products) {
+    public double calculateTotalStockValue() {
         double totalStockValue = 0.0;
 
-        for (Florist product : products) {
-            if (product instanceof Tree tree) {
-                totalStockValue += tree.getStock() * tree.getPrice();
-            } else if (product instanceof Flower flower) {
-                totalStockValue += flower.getStock() * flower.getPrice();
-            } else if (product instanceof Decoration decoration) {
-                totalStockValue += decoration.getStock() * decoration.getPrice();
-            }
+        for (Tree tree : trees) {
+            totalStockValue += tree.getStock() * tree.getPrice();
+        }
+
+        for (Flower flower : flowers) {
+            totalStockValue += flower.getStock() * flower.getPrice();
+        }
+
+        for (Decoration decoration : decorations) {
+            totalStockValue += decoration.getStock() * decoration.getPrice();
         }
 
         return totalStockValue;
     }
 
-    public void calculateStockQuantities(ArrayList<Florist> products) {
+    public void calculateStockQuantities() {
         System.out.println("STOCK");
 
-        for (Florist product : products) {
-            if (product instanceof Tree tree) {
-                System.out.println("TREES:\n" + (tree.getStock()));
-            } else if (product instanceof Flower flower) {
-                System.out.println("FLOWERS:\n" + (flower.getStock()));
-            } else if (product instanceof Decoration decoration) {
-                System.out.println("DECORATIONS:\n" + (decoration.getStock()));
-            }
-        }
+        int totalTreeStock = trees.stream().mapToInt(Tree::getStock).sum();
+        System.out.println("TREES:\n" + totalTreeStock);
+
+        int totalFlowerStock = flowers.stream().mapToInt(Flower::getStock).sum();
+        System.out.println("FLOWERS:\n" + totalFlowerStock);
+
+        int totalDecorationStock = decorations.stream().mapToInt(Decoration::getStock).sum();
+        System.out.println("DECORATIONS:\n" + totalDecorationStock);
     }
+
+    /**
     public void viewTicketDetail() {
         Ticket.viewTicketHistory(Ticket.getPurchases());
     }
 
+    public void addTicket(Ticket ticket) {
+        tickets.add(ticket);
+        totalSales += ticket.getTotal(); // Assuming Ticket has a method getTotal
+    }
+
+    public void viewTicketHistory() {
+        for (Ticket ticket : tickets) {
+            ticket.viewTicketDetail(); // Assuming Ticket has a method viewTicketDetails
+        }
+    }
+
+     **/
+    public double getTotalSales() {
+        return totalSales;
+    }
     @Override
     public String toString() {
         return "Florist:" + name;

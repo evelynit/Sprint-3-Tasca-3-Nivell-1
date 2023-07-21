@@ -8,52 +8,79 @@ import java.util.Scanner;
 
 public class Florist {
     private String name;
-    private static ArrayList<Tree> trees;
-    private static ArrayList<Flower> flowers;
-    private  static ArrayList<Decoration> decorations;
+    private ArrayList<Tree> trees;
+    private ArrayList<Flower> flowers;
+    private ArrayList<Decoration> decorations;
+    private ArrayList<Ticket> tickets;
     private double totalStock;
-    private  static ArrayList<Ticket> tickets;
     private double totalSales;
 
     // Constructor
     public Florist(String name) {
         this.name = name;
-        trees = new ArrayList<>();
-        flowers = new ArrayList<>();
-        decorations = new ArrayList<>();
-        tickets = new ArrayList<>();
-        totalStock = 0;
-        totalSales = 0;
+        this.trees = new ArrayList<>();
+        this.flowers = new ArrayList<>();
+        this.decorations = new ArrayList<>();
+        this.tickets = new ArrayList<>();
+        this.totalStock = 0;
+        this.totalSales = 0;
     }
-
 
     // Getters and Setters
     public void setName(String name) {
         this.name = name;
     }
+
     public String getName() {
-        return name;
+        return this.name;
+    }
+
+    public ArrayList<Tree> getTrees() {
+        return this.trees;
+    }
+
+    public void setTrees(ArrayList<Tree> trees) {
+        this.trees = trees;
+    }
+
+    public ArrayList<Flower> getFlowers() {
+        return this.flowers;
+    }
+
+    public void setFlowers(ArrayList<Flower> flowers) {
+        this.flowers = flowers;
+    }
+
+    public ArrayList<Decoration> getDecorations() {
+        return this.decorations;
+    }
+
+    public void setDecorations(ArrayList<Decoration> decorations) {
+        this.decorations = decorations;
+    }
+
+    public ArrayList<Ticket> getTickets() {
+        return this.tickets;
+    }
+
+    public void setTickets(ArrayList<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     public double getTotalStock() {
-        return totalStock;
+        return this.totalStock;
     }
 
     public void setTotalStock(double totalStock) {
         this.totalStock = totalStock;
     }
 
-    // Getters and Setters for lists
-    public static ArrayList<Flower> getFlowers() {
-        return flowers;
+    public double getTotalSales() {
+        return this.totalSales;
     }
 
-    public static ArrayList<Tree> getTrees() {
-        return trees;
-    }
-
-    public static ArrayList<Decoration> getDecorations() {
-        return decorations;
+    public void setTotalSales(double totalSales) {
+        this.totalSales = totalSales;
     }
 
     public Ticket getTicket() {
@@ -123,33 +150,37 @@ public class Florist {
                 String line = reader.nextLine();
                 String[] parts = line.split(",");
 
-                String floristName = parts[0];
-                String productType = parts[1];
+                if (parts.length >= 6) {
+                    String floristName = parts[0];
+                    String productType = parts[1];
 
-                Florist florist = findFloristByName(floristName, florists);
-                if (florist == null) {
-                    florist = new Florist(floristName);
-                    newFlorists.add(florist);
-                }
+                    Florist florist = findFloristByName(floristName, florists);
+                    if (florist == null) {
+                        florist = new Florist(floristName);
+                        newFlorists.add(florist);
+                    }
 
-                if (productType.equals("Tree")) {
-                    String name = parts[2];
-                    double height = Double.parseDouble(parts[3]);
-                    double price = Double.parseDouble(parts[4]);
-                    int stock = Integer.parseInt(parts[5]);
-                    florist.addProduct(new Tree(name, price, stock, height));
-                } else if (productType.equals("Flower")) {
-                    String name = parts[2];
-                    String color = parts[3];
-                    double price = Double.parseDouble(parts[4]);
-                    int stock = Integer.parseInt(parts[5]);
-                    florist.addProduct(new Flower(name, price, color, stock));
-                } else if (productType.equals("Decoration")) {
-                    String name = parts[2];
-                    double price = Double.parseDouble(parts[3]);
-                    int stock = Integer.parseInt(parts[4]);
-                    String material = parts[5];
-                    florist.addProduct(new Decoration(name, price, stock, material));
+                    if (productType.equals("Tree")) {
+                        String name = parts[2];
+                        double height = Double.parseDouble(parts[3]);
+                        double price = Double.parseDouble(parts[4]);
+                        int stock = Integer.parseInt(parts[5]);
+                        florist.addProduct(new Tree(name, price, stock, height));
+                    } else if (productType.equals("Flower")) {
+                        String name = parts[2];
+                        String color = parts[3];
+                        double price = Double.parseDouble(parts[4]);
+                        int stock = Integer.parseInt(parts[5]);
+                        florist.addProduct(new Flower(name, price, color, stock));
+                    } else if (productType.equals("Decoration")) {
+                        String name = parts[2];
+                        double price = Double.parseDouble(parts[3]);
+                        int stock = Integer.parseInt(parts[4]);
+                        String material = parts[5];
+                        florist.addProduct(new Decoration(name, price, stock, material));
+                    }
+                } else{
+                    System.out.println("Invalid line: " + line);
                 }
             }
 
@@ -266,9 +297,7 @@ public class Florist {
     }
 
      **/
-    public double getTotalSales() {
-        return totalSales;
-    }
+
     @Override
     public String toString() {
         return "Florist:" + name;

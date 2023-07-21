@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="535ae751-3ca8-48d1-83e8-baee4ca7f830" name="Changes" comment="Se han añadido las nuevas funciones en Main">
-      <change afterPath="$PROJECT_DIR$/resources/florists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Decoration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Decoration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Florist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Florist.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Flower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Flower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ticket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tree.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,11 +27,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -81,6 +79,7 @@
       <workItem from="1689718966696" duration="612000" />
       <workItem from="1689849079852" duration="489000" />
       <workItem from="1689850273975" duration="6755000" />
+      <workItem from="1689938941456" duration="6550000" />
     </task>
     <task id="LOCAL-00001" summary="Se han creado las clases Product y Tree">
       <created>1689462435176</created>

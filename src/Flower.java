@@ -48,6 +48,6 @@ public class Flower extends Florist{
 
     @Override
     public String toString() {
-        return "Flower," + name + "," + price + "," + color + "," + stock;
+        return name + "," + color + "," + price + "," + stock;
     }
 }
